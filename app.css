@@ -1,0 +1,109 @@
+/* 1. CONFIGURACIÓN DE LA PANTALLA (FONDO Y CENTRADO) */
+body {
+    background-color: #0f172a;  /* Fondo azul oscuro general */
+    margin: 0;
+    height: 100vh;              /* Altura del 100% de la ventana */
+    display: flex;              /* Activa el modo flexible */
+    justify-content: center;    /* Centra horizontalmente */
+    align-items: center;        /* Centra verticalmente */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 2. LA TARJETA (EL CONTENEDOR) */
+.login-card {
+    background-color: #1e293b;  /* Fondo de la tarjeta un poco más claro */
+    width: 100%;
+    max-width: 400px;           /* Ancho máximo para que no se estire */
+    padding: 40px;
+    border-radius: 16px;        /* Bordes redondeados */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Sombra elegante */
+    border: 1px solid #334155;  /* Borde sutil */
+    text-align: center;         /* Todo el texto centrado */
+    color: white;
+}
+
+/* 3. ENCABEZADO Y LOGO */
+.header img {
+    margin-bottom: 15px;
+}
+
+.header h1 {
+    margin: 5px 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.header p {
+    color: #94a3b8; /* Texto gris claro */
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+/* 4. FORMULARIO Y CAMPOS */
+.login-form h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #f8fafc;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.form-group {
+    text-align: left; /* Las etiquetas se ven mejor a la izquierda */
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    background-color: #0f172a; /* Fondo oscuro para el input */
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: white;
+    box-sizing: border-box; /* Evita que el padding rompa el tamaño */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #3b82f6; /* Se pone azul al escribir */
+}
+
+/* 5. BOTÓN DE INGRESAR */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #f97316; /* Naranja Protección Civil */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #ea580c; /* Naranja más oscuro al pasar mouse */
+}
+
+/* 6. MENSAJES DE ERROR */
+.message-box.error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    border: 1px solid #ef4444;
+}
