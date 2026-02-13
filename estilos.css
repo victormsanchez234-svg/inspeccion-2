@@ -781,4 +781,369 @@ body {
     border: 1px solid #334155;
 }
 
+    /* 1. BARRA DE HERRAMIENTAS */
+    .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+    .search-wrapper {
+        flex-grow: 1;
+        position: relative;
+        max-width: 500px;
+    }
+    .search-input {
+        width: 100%;
+        padding: 12px 20px;
+        padding-left: 40px;
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: white;
+        font-size: 0.95rem;
+    }
+    .search-input:focus { outline: none; border-color: #ffab00; }
 
+    /* 2. PESTAÑAS (TABS) */
+    .view-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #334155;
+        padding-bottom: 10px;
+    }
+    .tab-btn {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        position: relative;
+    }
+    .tab-btn.active { color: #ffab00; }
+    .tab-btn.active::after {
+        content: ''; position: absolute; bottom: -11px; left: 0;
+        width: 100%; height: 3px; background-color: #ffab00;
+    }
+
+    /* 3. BADGES DE RIESGO (Etiquetas de colores) */
+    .badge-risk {
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+    }
+    .bg-alto { background-color: rgba(220, 38, 38, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+    .bg-medio { background-color: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
+    .bg-bajo { background-color: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+
+    /* 4. MODAL FLOTANTE (Oculto por defecto) */
+    .modal-overlay {
+        display: none; /* ¡ESTO LO OCULTA INICIALMENTE! */
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+    }
+    .modal-content {
+        background-color: #0f172a;
+        width: 90%; max-width: 600px;
+        border-radius: 16px; padding: 30px;
+        border: 1px solid #334155;
+        box-shadow: 0 20px 25px rgba(0,0,0,0.5);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; color: #94a3b8; margin-bottom: 8px; font-size: 0.9rem; }
+    .form-control {
+        width: 100%; padding: 10px;
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 6px; color: white;
+    }
+    .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px; }
+    .btn-cancel { background: #334155; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+    .btn-save { background: #ffab00; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    
+    /* 5. MAPA */
+    #map-full { width: 100%; height: 500px; border-radius: 12px; }
+
+/* --- ESTILO DEL BOTÓN BRILLANTE (SALIR / VOLVER) --- */
+.btn-salir {
+    display: inline-block;
+    padding: 10px 25px;          /* Relleno para dar forma ovalada */
+    background-color: #ff0000;   /* Rojo brillante de base */
+    color: white !important;     /* Texto blanco forzado */
+    text-decoration: none;       /* Sin subrayado */
+    border-radius: 50px;         /* Bordes completamente redondos (pastilla) */
+    font-weight: bold;
+    font-family: sans-serif;
+    /* Efecto de resplandor rojo */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); 
+    transition: all 0.3s ease;   /* Suaviza la animación al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse */
+.btn-salir:hover {
+    background-color: #cc0000;   /* Rojo un poco más oscuro */
+    box-shadow: 0 0 25px rgba(255, 0, 0, 1); /* Resplandor más intenso */
+    transform: scale(1.05);      /* Crece ligeramente */
+}
+
+
+/* empieza modulo de inspectores
+
+/* =========================================
+   MÓDULO INSPECTORES - ESTILOS NUEVOS
+   ========================================= */
+
+/* --- AVATARES (Fotos de perfil redondas) --- */
+.avatar-small {
+    width: 40px; height: 40px;
+    border-radius: 50%; /* Lo hace redondo */
+    object-fit: cover;  /* Evita que la foto se deforme */
+    border: 2px solid #334155;
+}
+
+.avatar-large {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #334155;
+    margin-bottom: 15px;
+}
+
+/* --- BADGES DE ESTADO (Diferentes a los de riesgo) --- */
+.badge-status {
+    padding: 6px 15px;
+    border-radius: 30px; /* Más redondeados */
+    font-size: 0.8rem; font-weight: 600;
+    display: inline-block;
+    text-align: center; color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.status-disponible { background-color: #10b981; } /* Verde */
+.status-ocupado { background-color: #f59e0b; }    /* Naranja */
+.status-inactivo { background-color: #ef4444; }   /* Rojo */
+
+/* --- LAYOUT DEL MODAL DE PERFIL (2 Columnas) --- */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Izquierda angosta, derecha ancha */
+    gap: 30px;
+}
+.profile-left { text-align: center; border-right: 1px solid #334155; padding-right: 20px; }
+.profile-info p { color: #94a3b8; margin: 5px 0; font-size: 0.9rem; }
+.mini-map-container { height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid #334155; }
+.assignments-box { background: #1e293b; padding: 15px; border-radius: 12px; }
+.assignment-item { background: #0f172a; padding: 10px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid #3b82f6; font-size: 0.9rem; }
+
+
+/* --- VISTA DE PROGRAMACIÓN (TIMELINE / CALENDARIO) --- */
+/* --- VISTA DE PROGRAMACIÓN (TIMELINE / CALENDARIO) --- */
+.schedule-container {
+    display: grid;
+    /* 1 columna nombres + 8 columnas horas */
+    grid-template-columns: 200px repeat(8, 1fr); 
+    background-color: #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    
+    /* ¡ESTA ES LA LÍNEA QUE FALTA! */
+    position: relative; 
+}
+
+/* Cabecera de horas */
+.timeline-header {
+    background-color: #0f172a;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold; color: #94a3b8;
+    border-bottom: 1px solid #334155;
+}
+/* Primera celda vacía arriba a la izquierda */
+.header-empty { grid-column: 1 / 2; }
+
+/* Filas de inspectores */
+.inspector-row-label {
+    background-color: #0f172a; /* Un poco más oscuro para destacar */
+    padding: 20px 15px;
+    display: flex; align-items: center;
+    font-weight: 600;
+    border-bottom: 1px solid #334155; border-right: 1px solid #334155;
+}
+
+/* Celdas del grid (el fondo rayado) */
+.timeline-cell {
+    border-bottom: 1px solid #334155; border-right: 1px solid #334155;
+    background-color: #1e293b;
+    position: relative; /* Necesario para posicionar los bloques */
+    height: 80px; /* Altura fija para las filas */
+}
+
+/* BLOQUES DE TAREA (Las barras de colores) */
+.task-block {
+    position: absolute;
+    top: 10px; bottom: 10px; /* Margen arriba y abajo */
+    left: 5px; right: 5px;   /* Margen a los lados */
+    border-radius: 8px;
+    padding: 10px;
+    color: white; font-size: 0.8rem; font-weight: 600;
+    display: flex; align-items: center;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 2; /* Para que quede encima de las líneas de la rejilla */
+}
+
+/* Colores de tareas */
+.task-green { background-color: #10b981; }
+.task-blue { background-color: #3b82f6; }
+.task-red { background-color: #ef4444; }
+.task-orange { background-color: #f59e0b; }
+
+/* --- REGLAS PARA UBICAR LOS BLOQUES EN EL GRID --- */
+/* Esto es magia de CSS Grid. Le decimos en qué línea empieza y termina */
+/* Ejemplo: grid-column: 2 / span 2; significa "Empieza en la línea 2 (09:00) y ocupa 2 espacios" */
+
+/* Fila 1 (Victormsanchez) */
+.row-1 { grid-row: 2; } 
+/* Fila 2 (Mark Lennez) */
+.row-2 { grid-row: 3; }
+/* Fila 3 (Michel Juarez) */
+.row-3 { grid-row: 4; }
+
+
+/* =========================================
+   CORRECCIONES DEL CALENDARIO (TIMELINE)
+   ========================================= */
+
+/* 1. Asegura que el contenedor sea la referencia para los bloques absolutos */
+.schedule-container {
+    position: relative !important;
+}
+
+/* 2. Asignación ESTRICTA de filas (Grid Rows) */
+/* Fila 1 = Encabezados (Horas), así que los datos empiezan en la 2 */
+.row-1 { grid-row: 2 !important; }
+.row-2 { grid-row: 3 !important; }
+.row-3 { grid-row: 4 !important; }
+.row-4 { grid-row: 5 !important; }
+.row-5 { grid-row: 6 !important; }
+
+/* 3. Estilo visual de los bloques de tarea */
+.task-block {
+    display: flex !important;
+    align-items: center;
+    justify-content: center; /* Centra el texto */
+    padding: 0 5px !important;
+    font-size: 0.75rem !important;
+    line-height: 1.2;
+    text-align: center;
+    z-index: 10; /* Asegura que floten encima de las líneas */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+
+/* 1. Definimos la altura exacta de las filas para que no bailen */
+    .schedule-container {
+        display: grid !important;
+        grid-template-columns: 200px repeat(8, 1fr) !important;
+        grid-auto-rows: 80px !important; /* Altura fija para todas las filas */
+        grid-template-rows: 50px auto !important; /* Fila 1 (header) más chica */
+        position: relative !important;
+    }
+
+    /* 2. Truco: Hacemos que las tareas "floten" sobre la rejilla */
+    .task-block {
+        position: absolute !important; /* Clave para que no se caigan */
+        top: 15px !important;
+        bottom: 15px !important;
+        left: 5px !important;
+        right: 5px !important;
+        
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        z-index: 10 !important; /* Para que queden encima de las líneas */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    
+    /* 3. Ajuste para que los encabezados (horas) no se rompan */
+    .timeline-header {
+        height: 50px !important;
+        line-height: 50px !important;
+        padding: 0 !important;
+    }
+
+
+    /* --- ARREGLO FINAL CALENDARIO (Técnica de Capas) --- */
+
+/* 1. Fondo de celdas (Líneas verticales) */
+.timeline-bg-layer {
+    grid-column: 2 / -1; /* Ocupa desde la columna 2 hasta el final */
+    display: flex;       /* Usamos flex para dividir las 8 horas */
+    z-index: 0;          /* Se queda al fondo */
+    pointer-events: none; /* No estorba a los clicks */
+}
+
+/* Las líneas individuales del fondo */
+.timeline-bg-layer div {
+    flex: 1;             /* Se reparten el ancho equitativamente */
+    border-right: 1px solid #334155;
+    border-bottom: 1px solid #334155;
+}
+
+/* 2. Las Tareas (Flotan encima) */
+.task-block {
+    z-index: 10;         /* Flotan ENCIMA del fondo */
+    margin-top: 15px;    /* Centrado vertical visual */
+    height: 50px;        /* Altura fija bonita */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+}
+
+/* Ajuste para que las filas tengan altura correcta */
+.schedule-container {
+    grid-template-rows: 50px repeat(10, 80px) !important; /* Cabecera chica, filas grandes */
+}
+
+
+/* --- BARRA DE HERRAMIENTAS DEL CALENDARIO --- */
+.schedule-toolbar {
+    display: flex;
+    justify-content: space-between; /* Texto a la izq, botones a la der */
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #1e293b;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+/* --- AJUSTE PARA EXTENDER EL CALENDARIO --- */
+.schedule-container {
+    /* Altura mínima para que se vea lleno aunque haya pocos inspectores */
+    min-height: 600px; 
+    background-color: #0f172a; /* Fondo más oscuro para huecos vacíos */
+}
+
+/* Estilo para filas vacías (relleno visual) */
+.empty-row-label {
+    background-color: #0f172a;
+    border-right: 1px solid #334155;
+    border-bottom: 1px solid #334155;
+}
