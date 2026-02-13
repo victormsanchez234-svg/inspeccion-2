@@ -80,9 +80,9 @@ Resultados rsUltimas = UtilDB.ejecutaConsulta(sqlUltimas);
       <h3>Reprobadas</h3>
       <span><%= reprobadas %></span>
     </div>
-    <div class="kpi-card">
+    <div class="kpi-card" style="border-bottom: 4px solid #ffab00 !important;">
       <h3>Sin Acceso</h3>
-      <span><%= sinAcceso %></span>
+      <span style="color: #ffab00 !important;"><%= sinAcceso %></span>
     </div>
   </div>
 
