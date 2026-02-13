@@ -1147,3 +1147,105 @@ body {
     border-right: 1px solid #334155;
     border-bottom: 1px solid #334155;
 }
+
+
+/* =========================================
+   MÓDULO ACTAS - ESTILOS NUEVOS
+   ========================================= */
+
+/* --- NUEVO BADGE DE ESTADO (PENDIENTE - Amarillo) --- */
+/* Usamos un color ámbar/amarillo para diferenciarlo de los demás */
+.bg-pendiente {
+    background-color: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+    border: 1px solid #eab308;
+}
+
+/* --- ÁREA DE CARGA DE ARCHIVO (MODAL) --- */
+.file-upload-area {
+    border: 2px dashed #334155; /* Borde punteado */
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    color: #94a3b8;
+    cursor: pointer; /* Manito al pasar el mouse */
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    background-color: rgba(30, 41, 59, 0.5);
+}
+
+.file-upload-area:hover {
+    border-color: #ffab00; /* Se pone naranja al pasar el mouse */
+    color: #ffab00;
+    background-color: rgba(255, 171, 0, 0.05);
+}
+
+.file-upload-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* --- LAYOUT DEL MODAL DE DETALLE (Vista Dividida) --- */
+.detail-layout {
+    display: grid;
+    /* La columna izquierda es 1 parte, la derecha (preview) son 2 partes */
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    /* Altura fija para que el preview se vea grande */
+    height: 600px;
+}
+
+.detail-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid #334155; /* Línea separadora */
+    padding-right: 20px;
+}
+
+.detail-info-box p {
+    margin: 12px 0;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.detail-info-box strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+    color: #94a3b8; /* Etiqueta en gris claro */
+}
+
+/* Badge grande y llamativo para el detalle */
+.large-status-badge {
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    /* Sombra para que resalte */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+/* --- ÁREA DE PREVISUALIZACIÓN DE DOCUMENTO (Derecha) --- */
+.document-preview-container {
+    background-color: #0f172a; /* Fondo más oscuro para el marco */
+    border-radius: 12px;
+    border: 1px solid #334155;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Imagen de ejemplo del documento */
+.document-placeholder {
+    max-width: 90%;
+    max-height: 95%;
+    /* Sombra fuerte para que parezca una hoja flotando */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
