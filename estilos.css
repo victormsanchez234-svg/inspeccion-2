@@ -1249,3 +1249,259 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     border-radius: 4px;
 }
+
+
+
+/* =========================================
+   MÓDULO INSPECCIONES (KANBAN) - ESTILOS NUEVOS
+   ========================================= */
+
+/* =========================================
+   MÓDULO INSPECCIONES (TABLERO KANBAN)
+   ========================================= */
+
+/* 1. CONTENEDOR PRINCIPAL DEL TABLERO */
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Scroll horizontal si no caben las columnas */
+    padding-bottom: 20px;
+    height: calc(100vh - 180px); /* Altura dinámica: Pantalla menos encabezado */
+    align-items: flex-start; /* Alinea las columnas arriba */
+}
+
+/* 2. COLUMNAS */
+.kanban-column {
+    flex: 1;
+    min-width: 300px; /* Ancho mínimo para leer bien */
+    max-width: 350px; /* Ancho máximo para que no se estiren demasiado */
+    background-color: #1e293b;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #334155;
+    height: 100%;
+}
+
+/* Encabezados de Columna */
+.kanban-header {
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Colores Específicos de Encabezado */
+.header-pendientes { background-color: #475569; } /* Gris */
+.header-programadas { background-color: #3b82f6; } /* Azul */
+.header-en-curso { background-color: #f59e0b; color: #fff; } /* Naranja */
+.header-realizadas { background-color: #10b981; } /* Verde */
+
+/* Área de contenido (donde van las tarjetas) */
+.kanban-content {
+    padding: 15px;
+    overflow-y: auto; /* Scroll vertical interno */
+    flex-grow: 1;
+}
+
+/* Estilo del Scrollbar interno (para que se vea oscuro) */
+.kanban-content::-webkit-scrollbar { width: 6px; }
+.kanban-content::-webkit-scrollbar-track { background: #1e293b; }
+.kanban-content::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+
+
+/* 3. TARJETAS (CARDS) */
+.kanban-card {
+    background-color: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+.kanban-card:hover {
+    transform: translateY(-3px); /* Efecto de levantarse */
+    border-color: #94a3b8;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* Borde naranja para tarjeta activa */
+.card-active {
+    border: 2px solid #f59e0b !important;
+}
+
+/* Elementos internos de la tarjeta */
+.card-title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.card-meta {
+    display: flex;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    gap: 8px; /* Espacio entre icono y texto */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 1px solid #1e293b;
+    padding-top: 10px;
+}
+
+/* Información del Inspector (Avatar y Nombre) */
+.inspector-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+.inspector-avatar-mini {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover; /* Asegura que la foto no se deforme */
+    border: 1px solid #475569;
+}
+
+/* Badges pequeños para las tarjetas */
+.badge-mini {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.b-alto { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.5); }
+.b-medio { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.5); }
+.b-bajo { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.5); }
+
+
+
+/* =========================================
+   WIZARD DE NUEVA INSPECCIÓN (DISEÑO AVANZADO)
+   ========================================= */
+
+/* --- BARRA DE PROGRESO MODERNA --- */
+.wizard-progress-modern {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+    padding: 0 40px;
+}
+
+/* Línea de fondo (gris) */
+.wizard-progress-modern::before {
+    content: ''; position: absolute; top: 15px; left: 50px; right: 50px;
+    height: 4px; background-color: #334155; z-index: 0; border-radius: 2px;
+}
+
+/* Línea de progreso (verde/naranja) - Se controla con JS */
+.progress-bar-fill {
+    position: absolute; top: 15px; left: 50px; height: 4px;
+    background: linear-gradient(to right, #10b981, #f59e0b);
+    z-index: 0; border-radius: 2px; transition: width 0.4s ease;
+}
+
+.progress-step-m {
+    position: relative; z-index: 1; text-align: center; width: 120px;
+}
+
+.step-circle-m {
+    width: 35px; height: 35px;
+    background-color: #1e293b; border: 2px solid #64748b; color: #94a3b8;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-weight: bold; margin: 0 auto 10px auto; transition: all 0.3s ease;
+}
+.step-label-m { font-size: 0.85rem; color: #94a3b8; font-weight: 600; }
+
+/* Estados */
+.step-active-m .step-circle-m {
+    background-color: #f59e0b; border-color: #f59e0b; color: #0f172a; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+}
+.step-active-m .step-label-m { color: #f59e0b; }
+
+.step-completed-m .step-circle-m {
+    background-color: #10b981; border-color: #10b981; color: white;
+}
+.step-completed-m .step-label-m { color: #cbd5e1; }
+
+
+/* --- LAYOUT DE DOS COLUMNAS --- */
+.wizard-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; /* Izquierda ancha, derecha estrecha */
+    gap: 30px;
+    align-items: start;
+}
+
+.wizard-sidebar-col { /* Columna derecha (Resumen) */
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+
+/* --- SELECTOR VISUAL DE INSPECTORES (AVATARES) --- */
+.avatar-selector-label {
+    display: block; color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;
+}
+.avatar-list {
+    display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;
+}
+.avatar-option {
+    text-align: center; cursor: pointer; position: relative;
+}
+.avatar-img-wrapper {
+    width: 60px; height: 60px;
+    border-radius: 50%; padding: 3px; /* Espacio para el borde */
+    border: 2px solid transparent; transition: all 0.2s;
+}
+.avatar-img-wrapper img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #334155;
+}
+.avatar-name {
+    display: block; margin-top: 5px; font-size: 0.8rem; color: #cbd5e1;
+}
+.avatar-status {
+    display: block; font-size: 0.7rem;
+}
+/* Estado seleccionado */
+.avatar-option.selected .avatar-img-wrapper {
+    border-color: #f59e0b; /* Anillo naranja */
+}
+.avatar-option.selected .avatar-name { color: #f59e0b; font-weight: bold; }
+
+
+/* --- ESTILOS GENERALES DEL WIZARD --- */
+.wizard-step-content { display: none; animation: fadeIn 0.3s ease; }
+.wizard-step-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.summary-title { color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem; }
+.summary-item { margin-bottom: 15px; }
+.summary-label { display: block; color: #94a3b8; font-size: 0.85rem; margin-bottom: 3px; }
+.summary-value { color: white; font-weight: 600; font-size: 1rem; }
+
+
