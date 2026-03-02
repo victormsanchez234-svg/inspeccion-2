@@ -4,8 +4,9 @@
 <head>
 <title>.: Protección Civil - Dashboard :.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="css/estilos.css" rel="stylesheet" type="text/css" />
+<link href="css/estilos.css?v=5" rel="stylesheet" type="text/css" />
 <link href="imagenes/faviconhor.png" rel="shortcut icon" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <%@ page contentType="text/html; charset=utf-8" language="java" %>
@@ -87,12 +88,12 @@ Resultados rsUltimas = UtilDB.ejecutaConsulta(sqlUltimas);
   </div>
 
   <div class="actions-container">
-    <a href="actas_nueva.jsp" class="action-button">Nueva Inspección</a>
+    <a href="inspecciones.jsp" class="action-button">Inspecciónes</a>
     <a href="inmuebles_listado.jsp" class="action-button">Inmuebles</a>
-    <a href="actas_listado.jsp" class="action-button">Actas</a>
+    <a href="actas.jsp" class="action-button">Actas</a>
 
     <% if ("ADMIN".equals(session.getAttribute("rol"))) { %>
-      <a href="inspectores_listado.jsp" class="action-button">Inspectores</a>
+      <a href="inspectores.jsp" class="action-button active">Inspectores</a>
     <% } %>
   </div>
 
@@ -204,20 +205,27 @@ Resultados rsUltimas = UtilDB.ejecutaConsulta(sqlUltimas);
 </script>
 
 </div>
-        
-        <div class="mini-activity">
-            <p><strong>• Nueva Inspección:</strong> Paseo con anexo...</p>
-        </div>
-    </div>
 
   </div> <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
   
-  <div class="widget-flotante">
-    <h3>Info</h3>
+ <div class="widget-flotante pop-in" id="panel-info">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="margin: 0;">Info</h3>
+        <button class="btn-minimize" onclick="toggleBurbuja()" title="Minimizar">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+    </div>
+    
     <div class="user-info">
-    Usuario: <%= session.getAttribute("usuario") %> | 
-    Rol: <%= session.getAttribute("rol") %>
-    <a href="logout.jsp" class="btn-salir">SALIR</a>
+        Usuario: <%= session.getAttribute("usuario") %> | 
+        Rol: <%= session.getAttribute("rol") %>
+        <a href="logout.jsp" class="btn-salir">SALIR</a>
+    </div>
+</div>
+
+<div class="burbuja-flotante pop-out" id="burbuja-info" onclick="toggleBurbuja()" style="display: none;">
+    <i class="fa-solid fa-user"></i>
 </div>
 
 </div>
@@ -297,6 +305,60 @@ Resultados rsUltimas = UtilDB.ejecutaConsulta(sqlUltimas);
             }
         }
     });
+</script>
+
+
+
+<script>
+function toggleBurbuja() {
+    // Buscamos los elementos
+    const panel = document.getElementById('panel-info');
+    const burbuja = document.getElementById('burbuja-info');
+
+    // Validación de seguridad por si algo no cargó
+    if (!panel || !burbuja) {
+        alert("Falta el ID 'panel-info' o 'burbuja-info' en tu HTML");
+        return;
+    }
+
+    // Comprobamos si el panel NO está oculto
+    if (!panel.classList.contains('pop-out')) {
+        
+        // 1. Ocultar Panel
+        panel.classList.remove('pop-in');
+        panel.classList.add('pop-out');
+        
+        // 2. Mostrar Burbuja
+        setTimeout(() => {
+            panel.style.display = 'none';
+            burbuja.style.display = 'flex';
+            
+            // Forzamos un reflow para que la animación se reinicie
+            void burbuja.offsetWidth; 
+            
+            burbuja.classList.remove('pop-out');
+            burbuja.classList.add('pop-in');
+        }, 300); 
+        
+    } else {
+        
+        // 1. Ocultar Burbuja
+        burbuja.classList.remove('pop-in');
+        burbuja.classList.add('pop-out');
+        
+        // 2. Mostrar Panel
+        setTimeout(() => {
+            burbuja.style.display = 'none';
+            panel.style.display = 'block'; 
+            
+            // Forzamos un reflow
+            void panel.offsetWidth;
+            
+            panel.classList.remove('pop-out');
+            panel.classList.add('pop-in');
+        }, 300);
+    }
+}
 </script>
 
 </body>
